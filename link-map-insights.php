@@ -24,8 +24,8 @@ define( 'LMI_VERSION', '1.1.0' );
 function lmi_add_admin_and_help_menu() {
     // メインメニュー「Link Map」を追加
     add_menu_page(
-        'Link Map Insights',
-        'Link Map',
+        __( 'Link Map Insights', 'link-map-insights' ),
+        __( 'Link Map', 'link-map-insights' ),
         'manage_options',
         'link-map-insights',
         'lmi_admin_page',
@@ -36,8 +36,8 @@ function lmi_add_admin_and_help_menu() {
     // サブメニュー「ヘルプ」を追加
     add_submenu_page(
         'link-map-insights',  // 親メニューのスラッグ
-        'ヘルプ',             // サブメニューのタイトル
-        'ヘルプ',             // サブメニューのタイトル
+        __( 'ヘルプ', 'link-map-insights' ), // サブメニューのタイトル
+        __( 'ヘルプ', 'link-map-insights' ), // サブメニューのタイトル
         'manage_options',     // 権限
         'link-map-insights-help', // サブメニューのスラッグ
         'lmi_render_help_page'    // コールバック関数

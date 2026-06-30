@@ -6,21 +6,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 function lmi_render_help_page() {
     ?>
     <div id="lmi-help-container">
-        <h1>Link Map Insights ヘルプ</h1>
-        <p>プラグインをインストールしていただき、誠にありがとうございます。内部リンク改善の手助けになれば幸いです。</p>
-        <h2>基本的な使い方</h2>
-        <p>Link Map Insights は、ワンクリックでデータを取得・分析します。</p>
-        <p><a href="https://seory.co.jp/link-map-insights/guide/" target="_blank">詳細な解説はこちら</a></p>
+        <h1><?php esc_html_e( 'Link Map Insights ヘルプ', 'link-map-insights' ); ?></h1>
+        <p><?php esc_html_e( 'プラグインをインストールしていただき、誠にありがとうございます。内部リンク改善の手助けになれば幸いです。', 'link-map-insights' ); ?></p>
+        <h2><?php esc_html_e( '基本的な使い方', 'link-map-insights' ); ?></h2>
+        <p><?php esc_html_e( 'Link Map Insights は、ワンクリックでデータを取得・分析します。', 'link-map-insights' ); ?></p>
+        <p><a href="https://seory.co.jp/link-map-insights/guide/" target="_blank"><?php esc_html_e( '詳細な解説はこちら', 'link-map-insights' ); ?></a></p>
         <ul>
-            <li>STEP 1： 「Generate」ボタンをクリック</li>
-            <li>STEP 2： 数秒でリンクマップが表示されます</li>
-            <li>STEP 3： ページ下部に「被リンクゼロのページ」「発リンクゼロのページ」が表示されます</li>
+            <li><?php esc_html_e( 'STEP 1： 「Generate」ボタンをクリック', 'link-map-insights' ); ?></li>
+            <li><?php esc_html_e( 'STEP 2： 数秒でリンクマップが表示されます', 'link-map-insights' ); ?></li>
+            <li><?php esc_html_e( 'STEP 3： ページ下部に「被リンクゼロのページ」「発リンクゼロのページ」が表示されます', 'link-map-insights' ); ?></li>
         </ul>
-        <h2>LINKS</h2>
+        <h2><?php esc_html_e( 'LINKS', 'link-map-insights' ); ?></h2>
         <ul>
-            <li><a href="https://seory.co.jp/link-map-insights/" target="_blank">Link Map Insights 公式ページ</a></li>
-            <li><a href="https://seory.co.jp/" target="_blank">セオリコ</a></li>
-            <li><a href="https://x.com/seoryco" target="_blank">X (@seoryco)</a></li>
+            <li><a href="https://seory.co.jp/link-map-insights/" target="_blank"><?php esc_html_e( 'Link Map Insights 公式ページ', 'link-map-insights' ); ?></a></li>
+            <li><a href="https://seory.co.jp/" target="_blank"><?php esc_html_e( 'セオリコ', 'link-map-insights' ); ?></a></li>
+            <li><a href="https://x.com/seoryco" target="_blank"><?php esc_html_e( 'X (@seoryco)', 'link-map-insights' ); ?></a></li>
         </ul>
     </div>
     <?php

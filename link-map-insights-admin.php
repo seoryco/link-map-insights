@@ -11,8 +11,8 @@ function lmi_admin_page() {
             <div class="lmi-term-group-title">
                 <span><?php esc_html_e( '表示する投稿タイプ', 'link-map-insights' ); ?></span>
                 <span class="lmi-term-group-buttons">
-                    <button type="button" class="lmi-btn-select-all" data-target=".lmi-post-type-filter">全選択</button>
-                    <button type="button" class="lmi-btn-deselect-all" data-target=".lmi-post-type-filter">全解除</button>
+                    <button type="button" class="lmi-btn-select-all" data-target=".lmi-post-type-filter"><?php esc_html_e( '全選択', 'link-map-insights' ); ?></button>
+                    <button type="button" class="lmi-btn-deselect-all" data-target=".lmi-post-type-filter"><?php esc_html_e( '全解除', 'link-map-insights' ); ?></button>
                 </span>
             </div>
             <div class="lmi-term-group-inner" id="post-type-filters">
@@ -31,13 +31,13 @@ function lmi_admin_page() {
         </div>
         <div id="term-filters"></div>
         <div id="search-area">
-            <input type="text" id="node-search" placeholder="ノード検索">
-            <button id="search-button">検索</button>
-            <button id="reset-search-button">検索リセット</button>
+            <input type="text" id="node-search" placeholder="<?php esc_attr_e( 'ノード検索', 'link-map-insights' ); ?>">
+            <button id="search-button"><?php esc_html_e( '検索', 'link-map-insights' ); ?></button>
+            <button id="reset-search-button"><?php esc_html_e( '検索リセット', 'link-map-insights' ); ?></button>
         </div>
         <div id="zoom-controls">
-            <button type="button" id="zoom-in">拡大</button>
-            <button type="button" id="zoom-out">縮小</button>
+            <button type="button" id="zoom-in"><?php esc_html_e( '拡大', 'link-map-insights' ); ?></button>
+            <button type="button" id="zoom-out"><?php esc_html_e( '縮小', 'link-map-insights' ); ?></button>
             <label class="lmi-toggle-title-wrap">
                 <input type="checkbox" id="toggle-title-length" name="toggle-title-length"> <?php esc_html_e( 'タイトルを省略する', 'link-map-insights' ); ?>
             </label>
@@ -48,10 +48,16 @@ function lmi_admin_page() {
                 <div id="text">0%</div>
             </div>
         </div>
-        <button id="generate-link-map">Generate</button>
-        <h2 id="no-inbound-links-title">被リンクゼロのページ：0件</h2>
+        <button id="generate-link-map"><?php esc_html_e( 'Generate', 'link-map-insights' ); ?></button>
+        <h2 id="no-inbound-links-title"><?php
+            /* translators: %d: number of pages. */
+            printf( esc_html__( '被リンクゼロのページ：%d件', 'link-map-insights' ), 0 );
+        ?></h2>
         <div id="no-inbound-links-container"></div>
-        <h2 id="no-outbound-links-title">発リンクゼロのページ：0件</h2>
+        <h2 id="no-outbound-links-title"><?php
+            /* translators: %d: number of pages. */
+            printf( esc_html__( '発リンクゼロのページ：%d件', 'link-map-insights' ), 0 );
+        ?></h2>
         <div id="no-outbound-links-container"></div>
     </div>
     <?php
@@ -63,7 +69,8 @@ function lmi_admin_enqueue_scripts($hook) {
         return;
     }
     wp_enqueue_script( 'vis-js', plugins_url( 'js/lib/vis-network.min.js', __FILE__ ), array(), '9.1.13', true );
-    wp_enqueue_script( 'link-map-insights-admin-js', plugins_url( 'js/link-map-insights-admin.js', __FILE__ ), array( 'jquery', 'vis-js' ), LMI_VERSION, true );
+    wp_enqueue_script( 'link-map-insights-admin-js', plugins_url( 'js/link-map-insights-admin.js', __FILE__ ), array( 'jquery', 'vis-js', 'wp-i18n' ), LMI_VERSION, true );
+    wp_set_script_translations( 'link-map-insights-admin-js', 'link-map-insights', plugin_dir_path( __FILE__ ) . 'languages' );
     $lmi_cached = get_transient( 'lmi_dataset' );
     $lmi_cached_json = 'null';
     if ( is_array( $lmi_cached ) && isset( $lmi_cached['nodes'] ) && isset( $lmi_cached['edges'] ) && ! empty( $lmi_cached['nodes'] ) ) {

@@ -9,11 +9,11 @@ function lmi_get_dataset() {
 
 	// 管理者のみ実行可能
 	if ( ! current_user_can( 'manage_options' ) ) {
-		wp_send_json_error( array( 'message' => 'Forbidden' ), 403 );
+		wp_send_json_error( array( 'message' => __( 'Forbidden', 'link-map-insights' ) ), 403 );
 		return;
 	}
 	if ( ! isset( $_POST['lmi_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['lmi_nonce'] ) ), 'lmi_get_dataset' ) ) {
-		wp_send_json_error( array( 'message' => 'Invalid nonce' ), 403 );
+		wp_send_json_error( array( 'message' => __( 'Invalid nonce', 'link-map-insights' ) ), 403 );
 		return;
 	}
 

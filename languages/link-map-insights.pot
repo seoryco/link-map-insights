@@ -1,0 +1,187 @@
+# Copyright (C) 2026 seoryco
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Link Map Insights 1.1.0\n"
+"Report-Msgid-Bugs-To: https://seory.co.jp/link-map-insights/\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: link-map-insights\n"
+
+#: link-map-insights.php
+msgid "Link Map Insights"
+msgstr ""
+
+#: link-map-insights.php
+msgid "Link Map"
+msgstr ""
+
+#: link-map-insights.php
+msgid "ヘルプ"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "表示する投稿タイプ"
+msgstr ""
+
+#: link-map-insights-admin.php js/link-map-insights-admin.js
+msgid "全選択"
+msgstr ""
+
+#: link-map-insights-admin.php js/link-map-insights-admin.js
+msgid "全解除"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "ノード検索"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "検索"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "検索リセット"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "拡大"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "縮小"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "タイトルを省略する"
+msgstr ""
+
+#: link-map-insights-admin.php
+msgid "Generate"
+msgstr ""
+
+#. translators: %d: number of pages.
+#: link-map-insights-admin.php js/link-map-insights-admin.js
+msgid "被リンクゼロのページ：%d件"
+msgstr ""
+
+#. translators: %d: number of pages.
+#: link-map-insights-admin.php js/link-map-insights-admin.js
+msgid "発リンクゼロのページ：%d件"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "Link Map Insights ヘルプ"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "プラグインをインストールしていただき、誠にありがとうございます。内部リンク改善の手助けになれば幸いです。"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "基本的な使い方"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "Link Map Insights は、ワンクリックでデータを取得・分析します。"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "詳細な解説はこちら"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "STEP 1： 「Generate」ボタンをクリック"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "STEP 2： 数秒でリンクマップが表示されます"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "STEP 3： ページ下部に「被リンクゼロのページ」「発リンクゼロのページ」が表示されます"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "LINKS"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "Link Map Insights 公式ページ"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "セオリコ"
+msgstr ""
+
+#: link-map-insights-help.php
+msgid "X (@seoryco)"
+msgstr ""
+
+#: link-map-insights-core.php
+msgid "Forbidden"
+msgstr ""
+
+#: link-map-insights-core.php
+msgid "Invalid nonce"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "読み込み中…"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "エラー"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "データ形式が不正です"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "描画中…"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "描画エラー"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "描画中にエラーが発生しました: "
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "リクエストに失敗しました。"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "権限がありません。"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "その他"
+msgstr ""
+
+#. translators: 1: post type label, 2: number of pages.
+#: js/link-map-insights-admin.js
+msgid "%1$s：%2$d件"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "ID"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "ページタイトル"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "編集"
+msgstr ""
+
+#: js/link-map-insights-admin.js
+msgid "表示"
+msgstr ""

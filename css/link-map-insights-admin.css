@@ -1,0 +1,280 @@
+#control-area {
+    margin: 20px 0;
+}
+
+#post-type-filters label,
+#term-filters label {
+    display: inline-block;
+    margin-right: 12px;
+    margin-bottom: 6px;
+}
+
+/* タクソノミーごとのグループ表示 */
+.lmi-term-group {
+    margin-bottom: 16px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    background: #f6f7f7;
+    overflow: hidden;
+}
+
+.lmi-term-group-title {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #1d2327;
+    background: #e5e7eb;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.lmi-term-group-buttons {
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+}
+
+.lmi-btn-select-all,
+.lmi-btn-deselect-all {
+    padding: 2px 8px;
+    font-size: 11px;
+    line-height: 1.4;
+    cursor: pointer;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    color: #1d2327;
+}
+
+.lmi-btn-select-all:hover,
+.lmi-btn-deselect-all:hover {
+    background: #dcdcde;
+}
+
+.lmi-term-group-inner {
+    padding: 10px 12px;
+}
+
+#mynetwork {
+    position: relative;
+    z-index: 1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 100%;
+    width: 100%;
+}
+
+#network-container {
+    position: relative;
+    height: 700px; /* 高さを親要素で設定 */
+}
+
+#loadingBar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.category-color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border: 1px solid #000;
+}
+
+#generate-link-map {
+    display: block;
+    margin: 20px auto 0; /* 上に20pxのマージン、左右中央に配置 */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#generate-link-map:hover {
+    background-color: #005f8d;
+}
+
+/* カテゴリー欄の行の高さと余白を調整 */
+#category-filters label {
+    display: inline-block; /* 横並びに変更 */
+    margin-right: 10px;
+    line-height: 1.5;
+}
+
+/* 被リンクゼロ・発リンクゼロの投稿タイプ別グループ */
+.lmi-zero-links-group {
+    margin-bottom: 24px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    background: #fff;
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+.lmi-zero-links-group-title {
+    margin: 0;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.lmi-zero-links-group table {
+    margin: 0;
+    width: 100%;
+    table-layout: fixed;
+    border: 0;
+    border-collapse: collapse;
+}
+
+/* ID列：重ならないよう幅を確保 */
+.lmi-zero-links-group table th:nth-child(1),
+.lmi-zero-links-group table td:nth-child(1) {
+    width: 72px;
+    min-width: 72px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+/* ページタイトル列：残り幅を使用し、セル内で折り返し */
+.lmi-zero-links-group table th:nth-child(2),
+.lmi-zero-links-group table td:nth-child(2) {
+    padding: 8px 12px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    vertical-align: top;
+}
+
+/* 編集・表示列：ボタンが切れない幅を確保 */
+.lmi-zero-links-group table th:nth-child(3),
+.lmi-zero-links-group table td:nth-child(3),
+.lmi-zero-links-group table th:nth-child(4),
+.lmi-zero-links-group table td:nth-child(4) {
+    width: 80px;
+    min-width: 80px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+/* 検索エリアのスタイル */
+#search-area {
+    margin-bottom: 20px;
+    margin-top: 20px; /* カテゴリー選択と検索窓の間に余白を追加 */
+}
+
+#zoom-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+#zoom-controls .lmi-toggle-title-wrap {
+    margin: 0;
+}
+
+#node-search {
+    width: 50%; /* 横幅を50%に設定 */
+    padding: 8px;
+    margin-right: 10px;
+}
+
+#search-button, #reset-search-button {
+    padding: 8px 20px;
+    font-size: 15px; /* フォントサイズを15pxに変更 */
+    background-color: #0073aa;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#search-button:hover, #reset-search-button:hover {
+    background-color: #005f8d;
+}
+
+/* 記事リストエリアのスタイル */
+#no-inbound-links {
+    margin-top: 20px;
+}
+
+#no-inbound-links-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* テーブルの自動レイアウトを使用 */
+}
+
+#no-inbound-links-table th, #no-inbound-links-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#no-inbound-links-table th {
+    background-color: #f2f2f2;
+}
+
+#no-inbound-links-table td:nth-child(1),
+#no-inbound-links-table th:nth-child(1) {
+    width: 5%; /* ID列の幅を設定 */
+}
+
+#no-inbound-links-table td:nth-child(3),
+#no-inbound-links-table th:nth-child(3),
+#no-inbound-links-table td:nth-child(4),
+#no-inbound-links-table th:nth-child(4) {
+    width: 10%; /* 編集・表示列の幅を設定 */
+}
+
+/* 発リンクゼロのページのスタイル */
+#no-outbound-links {
+    margin-top: 20px;
+}
+
+#no-outbound-links-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; /* テーブルの自動レイアウトを使用 */
+}
+
+#no-outbound-links-table th, #no-outbound-links-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#no-outbound-links-table th {
+    background-color: #f2f2f2;
+}
+
+#no-outbound-links-table td:nth-child(1),
+#no-outbound-links-table th:nth-child(1) {
+    width: 5%; /* ID列の幅を設定 */
+}
+
+#no-outbound-links-table td:nth-child(3),
+#no-outbound-links-table th:nth-child(3),
+#no-outbound-links-table td:nth-child(4),
+#no-outbound-links-table th:nth-child(4) {
+    width: 10%; /* 編集・表示列の幅を設定 */
+}

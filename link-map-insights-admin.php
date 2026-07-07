@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 // 管理画面のページ内容
-function lmi_admin_page() {
+function seoryco_lmi_admin_page() {
     ?>
     <div class="wrap">
         <h1>Link Map Insights</h1>
@@ -64,7 +64,7 @@ function lmi_admin_page() {
 }
 
 // 必要なスクリプトとスタイルの読み込み
-function lmi_admin_enqueue_scripts($hook) {
+function seoryco_lmi_admin_enqueue_scripts($hook) {
     if ($hook !== 'toplevel_page_link-map-insights') {
         return;
     }
@@ -87,5 +87,5 @@ function lmi_admin_enqueue_scripts($hook) {
     wp_add_inline_script( 'link-map-insights-admin-js', $lmi_inline, 'before' );
     wp_enqueue_style('link-map-insights-admin-css', plugins_url('css/link-map-insights-admin.css', __FILE__), [], LMI_VERSION);
 }
-add_action('admin_enqueue_scripts', 'lmi_admin_enqueue_scripts');
+add_action('admin_enqueue_scripts', 'seoryco_lmi_admin_enqueue_scripts');
 ?>

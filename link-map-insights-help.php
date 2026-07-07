@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 // ヘルプページを表示する関数
-function lmi_render_help_page() {
+function seoryco_lmi_render_help_page() {
     ?>
     <div id="lmi-help-container">
         <h1><?php esc_html_e( 'Link Map Insights ヘルプ', 'link-map-insights' ); ?></h1>
@@ -27,7 +27,7 @@ function lmi_render_help_page() {
 }
 
 // CSSを読み込む関数
-function lmi_enqueue_help_assets($hook_suffix) {
+function seoryco_lmi_enqueue_help_assets($hook_suffix) {
     // フック名が 'link-map_page_link-map-insights-help' であるかを確認
     if ($hook_suffix != 'link-map_page_link-map-insights-help') {
         return;
@@ -35,6 +35,6 @@ function lmi_enqueue_help_assets($hook_suffix) {
     // CSSファイルをキューに追加
     wp_enqueue_style('lmi-help-css', plugins_url('css/link-map-insights-help.css', __FILE__), [], LMI_VERSION);
 }
-add_action('admin_enqueue_scripts', 'lmi_enqueue_help_assets');
+add_action('admin_enqueue_scripts', 'seoryco_lmi_enqueue_help_assets');
 
 ?>

@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function lmi_get_dataset() {
+function seoryco_lmi_get_dataset() {
 	header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
 	header( 'Pragma: no-cache' );
 
@@ -286,4 +286,4 @@ function lmi_get_dataset() {
 	wp_send_json( $result );
 }
 
-add_action( 'wp_ajax_lmi_get_dataset', 'lmi_get_dataset' );
+add_action( 'wp_ajax_lmi_get_dataset', 'seoryco_lmi_get_dataset' );

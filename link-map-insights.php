@@ -14,21 +14,21 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: link-map-insights
 Domain Path: /languages
 Requires at least: 5.0
-Tested up to: 6.9.1
+Tested up to: 7.0
 Requires PHP: 7.4
 */
 
 // プラグインのバージョンを定義
 define( 'LMI_VERSION', '1.1.0' );
 
-function lmi_add_admin_and_help_menu() {
+function seoryco_lmi_add_admin_and_help_menu() {
     // メインメニュー「Link Map」を追加
     add_menu_page(
         __( 'Link Map Insights', 'link-map-insights' ),
         __( 'Link Map', 'link-map-insights' ),
         'manage_options',
         'link-map-insights',
-        'lmi_admin_page',
+        'seoryco_lmi_admin_page',
         'dashicons-location',
         20
     );
@@ -40,10 +40,10 @@ function lmi_add_admin_and_help_menu() {
         __( 'ヘルプ', 'link-map-insights' ), // サブメニューのタイトル
         'manage_options',     // 権限
         'link-map-insights-help', // サブメニューのスラッグ
-        'lmi_render_help_page'    // コールバック関数
+        'seoryco_lmi_render_help_page'    // コールバック関数
     );
 }
-add_action('admin_menu', 'lmi_add_admin_and_help_menu');
+add_action('admin_menu', 'seoryco_lmi_add_admin_and_help_menu');
 
 
 // Include core functionality

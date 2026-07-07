@@ -55,11 +55,6 @@ This plugin bundles vis-network (https://visjs.github.io/vis-network/) for graph
 
 結果は一時データ（transient）としてサイト内に保存されます。外部へは一切送信されません。
 
-== Screenshots ==
-
-1. 内部リンクマップの表示画面
-2. 被リンクゼロ・発リンクゼロのページ一覧
-
 == Changelog ==
 
 = 1.1.0 =

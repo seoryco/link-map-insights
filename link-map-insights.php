@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 /*
 Plugin Name: Link Map Insights
-Plugin URI: https://seory.co.jp
+Plugin URI: https://seory.co.jp/link-map-insights/
 Description: ワンクリックで内部リンクマップを作成できます。
 Author: seoryco
 Version: 1.1.0

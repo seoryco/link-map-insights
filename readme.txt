@@ -32,7 +32,13 @@ This plugin does not send any data to external services. All analysis is perform
 
 == Third-party libraries ==
 
-This plugin bundles vis-network (https://visjs.github.io/vis-network/) for graph visualization, distributed under the MIT / Apache-2.0 license.
+This plugin bundles vis-network 9.1.13 for graph visualization, distributed under the MIT / Apache-2.0 license.
+
+* Project / documentation: https://visjs.github.io/vis-network/
+* Full source code and build tools (non-minified): https://github.com/visjs/vis-network
+* The bundled file js/lib/vis-network.min.js is the official, unmodified distribution build of version 9.1.13.
+
+The rest of the plugin source (PHP, CSS, and js/link-map-insights-admin.js) is included in the plugin in its original, human-readable form and is not compiled or minified.
 
 == Installation ==
 

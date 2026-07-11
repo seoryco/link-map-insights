@@ -30,7 +30,7 @@ function seoryco_lmi_add_admin_and_help_menu() {
         'link-map-insights',
         'seoryco_lmi_admin_page',
         'dashicons-location',
-        20
+        100
     );
 
     // サブメニュー「ヘルプ」を追加

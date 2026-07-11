@@ -33,7 +33,7 @@ function seoryco_lmi_enqueue_help_assets($hook_suffix) {
         return;
     }
     // CSSファイルをキューに追加
-    wp_enqueue_style('lmi-help-css', plugins_url('css/link-map-insights-help.css', __FILE__), [], LMI_VERSION);
+    wp_enqueue_style('lmi-help-css', plugins_url('css/link-map-insights-help.css', __FILE__), [], SEORYCO_LMI_VERSION);
 }
 add_action('admin_enqueue_scripts', 'seoryco_lmi_enqueue_help_assets');
 

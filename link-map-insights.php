@@ -19,7 +19,7 @@ Requires PHP: 7.4
 */
 
 // プラグインのバージョンを定義
-define( 'LMI_VERSION', '1.1.0' );
+define( 'SEORYCO_LMI_VERSION', '1.1.0' );
 
 function seoryco_lmi_add_admin_and_help_menu() {
     // メインメニュー「Link Map」を追加

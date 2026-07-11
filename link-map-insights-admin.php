@@ -69,7 +69,7 @@ function seoryco_lmi_admin_enqueue_scripts($hook) {
         return;
     }
     wp_enqueue_script( 'vis-js', plugins_url( 'js/lib/vis-network.min.js', __FILE__ ), array(), '9.1.13', true );
-    wp_enqueue_script( 'link-map-insights-admin-js', plugins_url( 'js/link-map-insights-admin.js', __FILE__ ), array( 'jquery', 'vis-js', 'wp-i18n' ), LMI_VERSION, true );
+    wp_enqueue_script( 'link-map-insights-admin-js', plugins_url( 'js/link-map-insights-admin.js', __FILE__ ), array( 'jquery', 'vis-js', 'wp-i18n' ), SEORYCO_LMI_VERSION, true );
     wp_set_script_translations( 'link-map-insights-admin-js', 'link-map-insights', plugin_dir_path( __FILE__ ) . 'languages' );
     $lmi_cached = get_transient( 'lmi_dataset' );
     $lmi_cached_json = 'null';
@@ -85,7 +85,7 @@ function seoryco_lmi_admin_enqueue_scripts($hook) {
     );
     $lmi_inline .= sprintf( 'lmiData.cached_dataset = %s;', $lmi_cached_json );
     wp_add_inline_script( 'link-map-insights-admin-js', $lmi_inline, 'before' );
-    wp_enqueue_style('link-map-insights-admin-css', plugins_url('css/link-map-insights-admin.css', __FILE__), [], LMI_VERSION);
+    wp_enqueue_style('link-map-insights-admin-css', plugins_url('css/link-map-insights-admin.css', __FILE__), [], SEORYCO_LMI_VERSION);
 }
 add_action('admin_enqueue_scripts', 'seoryco_lmi_admin_enqueue_scripts');
 ?>

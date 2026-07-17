@@ -3,4 +3,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-delete_transient( 'lmi_dataset' );
+delete_transient( 'seoryco_lmi_dataset' );

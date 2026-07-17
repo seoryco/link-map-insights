@@ -71,7 +71,7 @@ function seoryco_lmi_admin_enqueue_scripts($hook) {
     wp_enqueue_script( 'vis-js', plugins_url( 'js/lib/vis-network.min.js', __FILE__ ), array(), '9.1.13', true );
     wp_enqueue_script( 'link-map-insights-admin-js', plugins_url( 'js/link-map-insights-admin.js', __FILE__ ), array( 'jquery', 'vis-js', 'wp-i18n' ), SEORYCO_LMI_VERSION, true );
     wp_set_script_translations( 'link-map-insights-admin-js', 'link-map-insights', plugin_dir_path( __FILE__ ) . 'languages' );
-    $lmi_cached = get_transient( 'lmi_dataset' );
+    $lmi_cached = get_transient( 'seoryco_lmi_dataset' );
     $lmi_cached_json = 'null';
     if ( is_array( $lmi_cached ) && isset( $lmi_cached['nodes'] ) && isset( $lmi_cached['edges'] ) && ! empty( $lmi_cached['nodes'] ) ) {
         $lmi_cached_json = wp_json_encode( $lmi_cached );
@@ -80,7 +80,7 @@ function seoryco_lmi_admin_enqueue_scripts($hook) {
         'var lmiData = %s;',
         wp_json_encode( array(
             'ajax_url'       => admin_url( 'admin-ajax.php' ),
-            'nonce'          => wp_create_nonce( 'lmi_get_dataset' ),
+            'nonce'          => wp_create_nonce( 'seoryco_lmi_get_dataset' ),
         ) )
     );
     $lmi_inline .= sprintf( 'lmiData.cached_dataset = %s;', $lmi_cached_json );

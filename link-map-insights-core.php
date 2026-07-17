@@ -12,14 +12,14 @@ function seoryco_lmi_get_dataset() {
 		wp_send_json_error( array( 'message' => __( 'Forbidden', 'link-map-insights' ) ), 403 );
 		return;
 	}
-	if ( ! isset( $_POST['lmi_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['lmi_nonce'] ) ), 'lmi_get_dataset' ) ) {
+	if ( ! isset( $_POST['lmi_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['lmi_nonce'] ) ), 'seoryco_lmi_get_dataset' ) ) {
 		wp_send_json_error( array( 'message' => __( 'Invalid nonce', 'link-map-insights' ) ), 403 );
 		return;
 	}
 
 	$lmi_regenerate = isset( $_POST['lmi_regenerate'] ) && ( $_POST['lmi_regenerate'] === '1' || $_POST['lmi_regenerate'] === 'true' );
 	if ( ! $lmi_regenerate ) {
-		$cached = get_transient( 'lmi_dataset' );
+		$cached = get_transient( 'seoryco_lmi_dataset' );
 		if ( is_array( $cached ) && isset( $cached['nodes'] ) && isset( $cached['edges'] ) ) {
 			wp_send_json( $cached );
 			return;
@@ -282,8 +282,8 @@ function seoryco_lmi_get_dataset() {
 		'no_inbound_links'   => $no_inbound_links,
 		'no_outbound_links'  => $no_outbound_links,
 	);
-	set_transient( 'lmi_dataset', $result, 0 );
+	set_transient( 'seoryco_lmi_dataset', $result, 0 );
 	wp_send_json( $result );
 }
 
-add_action( 'wp_ajax_lmi_get_dataset', 'seoryco_lmi_get_dataset' );
+add_action( 'wp_ajax_seoryco_lmi_get_dataset', 'seoryco_lmi_get_dataset' );

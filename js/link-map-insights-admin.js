@@ -48,7 +48,7 @@ jQuery(document).ready(function ($) {
         }
         var postTypes = $('.lmi-post-type-filter:checked').map(function () { return $(this).val(); }).get();
         var payload = {
-            action: 'lmi_get_dataset',
+            action: 'seoryco_lmi_get_dataset',
             lmi_nonce: lmiData.nonce
         };
         if (postTypes.length) {

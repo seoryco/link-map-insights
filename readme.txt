@@ -4,7 +4,7 @@ Tags: internal links, seo, link map, visualization, internal linking
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Main features:
 * List of pages with no inbound links
 * List of pages with no outbound links
 
-The plugin admin interface is provided in Japanese.
+The plugin is fully translatable. The admin interface is available in English and Japanese.
 
 == External services ==
 
@@ -58,6 +58,13 @@ Results are stored locally on your site as a transient. Nothing is ever sent to 
 
 == Changelog ==
 
+= 1.2.1 =
+* Updated the bundled Japanese translation to follow the WordPress Japanese translation style guide (half-width colons, parentheses and question marks).
+
+= 1.2.0 =
+* Internationalization: all interface strings are now in English in the source, so the plugin can be translated on translate.wordpress.org.
+* Added a bundled Japanese translation (languages/link-map-insights-ja.mo).
+
 = 1.1.0 =
 * Prepared for the WordPress.org plugin directory: removed the external update mechanism, bundled vis-network locally, and added readme.txt.
 
@@ -65,6 +72,12 @@ Results are stored locally on your site as a transient. Nothing is ever sent to 
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Japanese translation refinements only. No functional changes.
+
+= 1.2.0 =
+The interface is now translatable. English and Japanese are included.
 
 = 1.1.0 =
 Updates are now delivered through the WordPress.org plugin directory.

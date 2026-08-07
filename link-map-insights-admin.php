@@ -9,10 +9,10 @@ function seoryco_lmi_admin_page() {
         <h1>Link Map Insights</h1>
         <div id="post-type-filters-wrap" class="lmi-term-group">
             <div class="lmi-term-group-title">
-                <span><?php esc_html_e( '表示する投稿タイプ', 'link-map-insights' ); ?></span>
+                <span><?php esc_html_e( 'Post types to display', 'link-map-insights' ); ?></span>
                 <span class="lmi-term-group-buttons">
-                    <button type="button" class="lmi-btn-select-all" data-target=".lmi-post-type-filter"><?php esc_html_e( '全選択', 'link-map-insights' ); ?></button>
-                    <button type="button" class="lmi-btn-deselect-all" data-target=".lmi-post-type-filter"><?php esc_html_e( '全解除', 'link-map-insights' ); ?></button>
+                    <button type="button" class="lmi-btn-select-all" data-target=".lmi-post-type-filter"><?php esc_html_e( 'Select all', 'link-map-insights' ); ?></button>
+                    <button type="button" class="lmi-btn-deselect-all" data-target=".lmi-post-type-filter"><?php esc_html_e( 'Deselect all', 'link-map-insights' ); ?></button>
                 </span>
             </div>
             <div class="lmi-term-group-inner" id="post-type-filters">
@@ -31,15 +31,15 @@ function seoryco_lmi_admin_page() {
         </div>
         <div id="term-filters"></div>
         <div id="search-area">
-            <input type="text" id="node-search" placeholder="<?php esc_attr_e( 'ノード検索', 'link-map-insights' ); ?>">
-            <button id="search-button"><?php esc_html_e( '検索', 'link-map-insights' ); ?></button>
-            <button id="reset-search-button"><?php esc_html_e( '検索リセット', 'link-map-insights' ); ?></button>
+            <input type="text" id="node-search" placeholder="<?php esc_attr_e( 'Search nodes', 'link-map-insights' ); ?>">
+            <button id="search-button"><?php esc_html_e( 'Search', 'link-map-insights' ); ?></button>
+            <button id="reset-search-button"><?php esc_html_e( 'Reset search', 'link-map-insights' ); ?></button>
         </div>
         <div id="zoom-controls">
-            <button type="button" id="zoom-in"><?php esc_html_e( '拡大', 'link-map-insights' ); ?></button>
-            <button type="button" id="zoom-out"><?php esc_html_e( '縮小', 'link-map-insights' ); ?></button>
+            <button type="button" id="zoom-in"><?php esc_html_e( 'Zoom in', 'link-map-insights' ); ?></button>
+            <button type="button" id="zoom-out"><?php esc_html_e( 'Zoom out', 'link-map-insights' ); ?></button>
             <label class="lmi-toggle-title-wrap">
-                <input type="checkbox" id="toggle-title-length" name="toggle-title-length"> <?php esc_html_e( 'タイトルを省略する', 'link-map-insights' ); ?>
+                <input type="checkbox" id="toggle-title-length" name="toggle-title-length"> <?php esc_html_e( 'Shorten titles', 'link-map-insights' ); ?>
             </label>
         </div>
         <div id="network-container">
@@ -51,12 +51,12 @@ function seoryco_lmi_admin_page() {
         <button id="generate-link-map"><?php esc_html_e( 'Generate', 'link-map-insights' ); ?></button>
         <h2 id="no-inbound-links-title"><?php
             /* translators: %d: number of pages. */
-            printf( esc_html__( '被リンクゼロのページ：%d件', 'link-map-insights' ), 0 );
+            printf( esc_html__( 'Pages with no inbound links: %d', 'link-map-insights' ), 0 );
         ?></h2>
         <div id="no-inbound-links-container"></div>
         <h2 id="no-outbound-links-title"><?php
             /* translators: %d: number of pages. */
-            printf( esc_html__( '発リンクゼロのページ：%d件', 'link-map-insights' ), 0 );
+            printf( esc_html__( 'Pages with no outbound links: %d', 'link-map-insights' ), 0 );
         ?></h2>
         <div id="no-outbound-links-container"></div>
     </div>

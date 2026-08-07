@@ -44,7 +44,7 @@ jQuery(document).ready(function ($) {
         if (regenerate) {
             $text.text('0%');
         } else {
-            $text.text( __( '読み込み中…', 'link-map-insights' ) );
+            $text.text( __( 'Loading…', 'link-map-insights' ) );
         }
         var postTypes = $('.lmi-post-type-filter:checked').map(function () { return $(this).val(); }).get();
         var payload = {
@@ -66,13 +66,13 @@ jQuery(document).ready(function ($) {
             .done(function (response) {
                 if (response && response.success === false && response.data) {
                     $bar.css('display', 'none');
-                    $text.text(response.data.message || __( 'エラー', 'link-map-insights' ));
+                    $text.text(response.data.message || __( 'Error', 'link-map-insights' ));
                     return;
                 }
                 if (!response || !Array.isArray(response.nodes) || !Array.isArray(response.edges)) {
                     $bar.css('display', 'none');
                     if (regenerate) {
-                        $text.text( __( 'データ形式が不正です', 'link-map-insights' ) );
+                        $text.text( __( 'Invalid data format', 'link-map-insights' ) );
                     }
                     if (typeof console !== 'undefined' && console.error) {
                         console.error('LMI response:', response);
@@ -85,7 +85,7 @@ jQuery(document).ready(function ($) {
                 }
                 try {
                     if (regenerate) {
-                        $text.text( __( '描画中…', 'link-map-insights' ) );
+                        $text.text( __( 'Rendering…', 'link-map-insights' ) );
                     }
                     draw(response, regenerate);
                     if (!regenerate) {
@@ -94,8 +94,8 @@ jQuery(document).ready(function ($) {
                 } catch (err) {
                     $bar.css('display', 'none');
                     if (regenerate) {
-                        $text.text( __( '描画エラー', 'link-map-insights' ) );
-                        alert( __( '描画中にエラーが発生しました: ', 'link-map-insights' ) + (err.message || err));
+                        $text.text( __( 'Rendering error', 'link-map-insights' ) );
+                        alert( __( 'An error occurred while rendering: ', 'link-map-insights' ) + (err.message || err));
                     }
                     if (typeof console !== 'undefined' && console.error) {
                         console.error('LMI draw error:', err);
@@ -104,11 +104,11 @@ jQuery(document).ready(function ($) {
             })
             .fail(function (xhr) {
                 $bar.css('display', 'none');
-                var msg = __( 'リクエストに失敗しました。', 'link-map-insights' );
+                var msg = __( 'The request failed.', 'link-map-insights' );
                 if (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) {
                     msg = xhr.responseJSON.data.message;
                 } else if (xhr.status === 403) {
-                    msg = __( '権限がありません。', 'link-map-insights' );
+                    msg = __( 'You do not have permission.', 'link-map-insights' );
                 }
                 $text.text(msg);
                 if (regenerate) {
@@ -170,7 +170,7 @@ jQuery(document).ready(function ($) {
         Object.keys(termsColors).forEach(function (key) {
             var info = termsColors[key];
             if (!info || typeof info !== 'object') { return; }
-            var groupName = (info.taxonomy_label && info.taxonomy_label.toString()) ? info.taxonomy_label : __( 'その他', 'link-map-insights' );
+            var groupName = (info.taxonomy_label && info.taxonomy_label.toString()) ? info.taxonomy_label : __( 'Other', 'link-map-insights' );
             if (!groups[groupName]) { groups[groupName] = []; }
             groups[groupName].push({ key: key, info: info });
         });
@@ -189,8 +189,8 @@ jQuery(document).ready(function ($) {
             $title.append($('<span></span>').text(groupName));
             $title.append(
                 $('<span class="lmi-term-group-buttons"></span>').append(
-                    $('<button type="button" class="lmi-btn-select-all"></button>').text( __( '全選択', 'link-map-insights' ) ),
-                    $('<button type="button" class="lmi-btn-deselect-all"></button>').text( __( '全解除', 'link-map-insights' ) )
+                    $('<button type="button" class="lmi-btn-select-all"></button>').text( __( 'Select all', 'link-map-insights' ) ),
+                    $('<button type="button" class="lmi-btn-deselect-all"></button>').text( __( 'Deselect all', 'link-map-insights' ) )
                 )
             );
             $section.append($title);
@@ -356,13 +356,13 @@ jQuery(document).ready(function ($) {
                 var label = postTypeLabels[pt] || pt;
                 var $section = $('<div class="lmi-zero-links-group"></div>');
                 /* translators: 1: post type label, 2: number of pages. */
-                $section.append($('<h3 class="lmi-zero-links-group-title"></h3>').text(sprintf( __( '%1$s：%2$d件', 'link-map-insights' ), label, items.length )));
+                $section.append($('<h3 class="lmi-zero-links-group-title"></h3>').text(sprintf( __( '%1$s: %2$d', 'link-map-insights' ), label, items.length )));
                 var $table = $('<table class="wp-list-table widefat fixed striped"></table>').append(
                     $('<thead></thead>').append($('<tr></tr>').append(
                         $('<th></th>').text( __( 'ID', 'link-map-insights' ) ),
-                        $('<th></th>').text( __( 'ページタイトル', 'link-map-insights' ) ),
-                        $('<th></th>').text( __( '編集', 'link-map-insights' ) ),
-                        $('<th></th>').text( __( '表示', 'link-map-insights' ) )
+                        $('<th></th>').text( __( 'Page title', 'link-map-insights' ) ),
+                        $('<th></th>').text( __( 'Edit', 'link-map-insights' ) ),
+                        $('<th></th>').text( __( 'View', 'link-map-insights' ) )
                     )),
                     $('<tbody></tbody>')
                 );
@@ -371,8 +371,8 @@ jQuery(document).ready(function ($) {
                     var $tr = $('<tr></tr>').append(
                         $('<td></td>').text(post.id),
                         $('<td></td>').text(post.title),
-                        $('<td></td>').append($('<button>', { type: 'button', class: 'lmi-btn-edit', 'data-url': post.edit_url || '' }).text( __( '編集', 'link-map-insights' ) )),
-                        $('<td></td>').append($('<button>', { type: 'button', class: 'lmi-btn-view', 'data-url': post.view_url || '' }).text( __( '表示', 'link-map-insights' ) ))
+                        $('<td></td>').append($('<button>', { type: 'button', class: 'lmi-btn-edit', 'data-url': post.edit_url || '' }).text( __( 'Edit', 'link-map-insights' ) )),
+                        $('<td></td>').append($('<button>', { type: 'button', class: 'lmi-btn-view', 'data-url': post.view_url || '' }).text( __( 'View', 'link-map-insights' ) ))
                     );
                     $tbody.append($tr);
                 });
@@ -381,9 +381,9 @@ jQuery(document).ready(function ($) {
             });
         }
         /* translators: %d: number of pages. */
-        renderZeroLinksTable('no-inbound-links-container', response.no_inbound_links || [], 'no-inbound-links-title', __( '被リンクゼロのページ：%d件', 'link-map-insights' ));
+        renderZeroLinksTable('no-inbound-links-container', response.no_inbound_links || [], 'no-inbound-links-title', __( 'Pages with no inbound links: %d', 'link-map-insights' ));
         /* translators: %d: number of pages. */
-        renderZeroLinksTable('no-outbound-links-container', response.no_outbound_links || [], 'no-outbound-links-title', __( '発リンクゼロのページ：%d件', 'link-map-insights' ));
+        renderZeroLinksTable('no-outbound-links-container', response.no_outbound_links || [], 'no-outbound-links-title', __( 'Pages with no outbound links: %d', 'link-map-insights' ));
 
         $(document).off('click.lmiTable').on('click.lmiTable', '.lmi-btn-edit, .lmi-btn-view', function () {
             var url = $(this).data('url');

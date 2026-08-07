@@ -5,9 +5,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*
 Plugin Name: Link Map Insights
 Plugin URI: https://seory.co.jp/link-map-insights/
-Description: ワンクリックで内部リンクマップを作成できます。
+Description: Visualize your site's internal link structure in one click.
 Author: seoryco
-Version: 1.1.0
+Version: 1.2.1
 Author URI: https://seory.co.jp
 License: GPL2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,7 @@ Requires PHP: 7.4
 */
 
 // プラグインのバージョンを定義
-define( 'SEORYCO_LMI_VERSION', '1.1.0' );
+define( 'SEORYCO_LMI_VERSION', '1.2.1' );
 
 function seoryco_lmi_add_admin_and_help_menu() {
     // メインメニュー「Link Map」を追加
@@ -36,8 +36,8 @@ function seoryco_lmi_add_admin_and_help_menu() {
     // サブメニュー「ヘルプ」を追加
     add_submenu_page(
         'link-map-insights',  // 親メニューのスラッグ
-        __( 'ヘルプ', 'link-map-insights' ), // サブメニューのタイトル
-        __( 'ヘルプ', 'link-map-insights' ), // サブメニューのタイトル
+        __( 'Help', 'link-map-insights' ), // サブメニューのタイトル
+        __( 'Help', 'link-map-insights' ), // サブメニューのタイトル
         'manage_options',     // 権限
         'link-map-insights-help', // サブメニューのスラッグ
         'seoryco_lmi_render_help_page'    // コールバック関数

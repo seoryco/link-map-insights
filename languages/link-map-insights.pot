@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Link Map Insights 1.1.0\n"
+"Project-Id-Version: Link Map Insights 1.2.1\n"
 "Report-Msgid-Bugs-To: https://seory.co.jp/link-map-insights/\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,8 +11,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: link-map-insights\n"
 
+#. Plugin Name of the plugin
 #: link-map-insights.php
 msgid "Link Map Insights"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: link-map-insights.php
+msgid "https://seory.co.jp/link-map-insights/"
+msgstr ""
+
+#. Description of the plugin
+#: link-map-insights.php
+msgid "Visualize your site's internal link structure in one click."
+msgstr ""
+
+#. Author of the plugin
+#: link-map-insights.php
+msgid "seoryco"
+msgstr ""
+
+#. Author URI of the plugin
+#: link-map-insights.php
+msgid "https://seory.co.jp"
 msgstr ""
 
 #: link-map-insights.php
@@ -20,43 +41,43 @@ msgid "Link Map"
 msgstr ""
 
 #: link-map-insights.php
-msgid "ヘルプ"
+msgid "Help"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "表示する投稿タイプ"
+msgid "Post types to display"
 msgstr ""
 
 #: link-map-insights-admin.php js/link-map-insights-admin.js
-msgid "全選択"
+msgid "Select all"
 msgstr ""
 
 #: link-map-insights-admin.php js/link-map-insights-admin.js
-msgid "全解除"
+msgid "Deselect all"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "ノード検索"
+msgid "Search nodes"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "検索"
+msgid "Search"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "検索リセット"
+msgid "Reset search"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "拡大"
+msgid "Zoom in"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "縮小"
+msgid "Zoom out"
 msgstr ""
 
 #: link-map-insights-admin.php
-msgid "タイトルを省略する"
+msgid "Shorten titles"
 msgstr ""
 
 #: link-map-insights-admin.php
@@ -65,44 +86,44 @@ msgstr ""
 
 #. translators: %d: number of pages.
 #: link-map-insights-admin.php js/link-map-insights-admin.js
-msgid "被リンクゼロのページ：%d件"
+msgid "Pages with no inbound links: %d"
 msgstr ""
 
 #. translators: %d: number of pages.
 #: link-map-insights-admin.php js/link-map-insights-admin.js
-msgid "発リンクゼロのページ：%d件"
+msgid "Pages with no outbound links: %d"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "Link Map Insights ヘルプ"
+msgid "Link Map Insights Help"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "プラグインをインストールしていただき、誠にありがとうございます。内部リンク改善の手助けになれば幸いです。"
+msgid "Thank you for installing this plugin. We hope it helps you improve your internal linking."
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "基本的な使い方"
+msgid "Getting started"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "Link Map Insights は、ワンクリックでデータを取得・分析します。"
+msgid "Link Map Insights collects and analyzes your data with a single click."
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "詳細な解説はこちら"
+msgid "Read the detailed guide"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "STEP 1： 「Generate」ボタンをクリック"
+msgid "STEP 1: Click the \"Generate\" button"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "STEP 2： 数秒でリンクマップが表示されます"
+msgid "STEP 2: The link map appears within a few seconds"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "STEP 3： ページ下部に「被リンクゼロのページ」「発リンクゼロのページ」が表示されます"
+msgid "STEP 3: Pages with no inbound links and pages with no outbound links are listed at the bottom of the page"
 msgstr ""
 
 #: link-map-insights-help.php
@@ -110,11 +131,11 @@ msgid "LINKS"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "Link Map Insights 公式ページ"
+msgid "Link Map Insights official page"
 msgstr ""
 
 #: link-map-insights-help.php
-msgid "セオリコ"
+msgid "Seoryco"
 msgstr ""
 
 #: link-map-insights-help.php
@@ -130,44 +151,44 @@ msgid "Invalid nonce"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "読み込み中…"
+msgid "Loading…"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "エラー"
+msgid "Error"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "データ形式が不正です"
+msgid "Invalid data format"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "描画中…"
+msgid "Rendering…"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "描画エラー"
+msgid "Rendering error"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "描画中にエラーが発生しました: "
+msgid "An error occurred while rendering: "
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "リクエストに失敗しました。"
+msgid "The request failed."
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "権限がありません。"
+msgid "You do not have permission."
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "その他"
+msgid "Other"
 msgstr ""
 
 #. translators: 1: post type label, 2: number of pages.
 #: js/link-map-insights-admin.js
-msgid "%1$s：%2$d件"
+msgid "%1$s: %2$d"
 msgstr ""
 
 #: js/link-map-insights-admin.js
@@ -175,13 +196,13 @@ msgid "ID"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "ページタイトル"
+msgid "Page title"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "編集"
+msgid "Edit"
 msgstr ""
 
 #: js/link-map-insights-admin.js
-msgid "表示"
+msgid "View"
 msgstr ""

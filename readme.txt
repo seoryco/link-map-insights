@@ -4,7 +4,7 @@ Tags: internal links, seo, link map, visualization, internal linking
 Requires at least: 5.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,8 @@ Main features:
 * Node search, zoom in/out, and shortened title display
 * List of pages with no inbound links
 * List of pages with no outbound links
+* Link list (table view) of every detected source-to-target link
+* Download the detected links as a CSV file
 
 The plugin is fully translatable. The admin interface is available in English and Japanese.
 
@@ -56,7 +58,20 @@ All post types registered as public are analyzed (attachments are excluded). You
 
 Results are stored locally on your site as a transient. Nothing is ever sent to external services.
 
+= Which links are detected? =
+
+The plugin detects: absolute URLs (`https://...`) in the post content, `href` attributes in the post content (including root-relative URLs starting with `/`, resolved against your site's URL), and the block comment format `<!-- link id="123" -->` used by some editors. Relative paths that do not start with `/` (for example `sub-page/`) are not detected. Links added only through ACF fields, shared theme parts (such as headers/footers), or JavaScript-rendered content are not analyzed, since the plugin only reads the post content stored in the database.
+
+= Can I download the detected links as a CSV file? =
+
+Yes. After clicking "Generate", use the "Download CSV" button on the Link Map screen. The file is generated on the fly and is not stored on the server.
+
 == Changelog ==
+
+= 1.3.0 =
+* Added a "Download CSV" button to export the detected links (source/target post ID, title, URL, and post type) without saving anything on the server.
+* Added a "Link list" tab with a table view of every detected source-to-target link, as an alternative to the graph view.
+* Link detection now also covers `href` attributes, including root-relative URLs (starting with `/`), in addition to the existing absolute URL and block comment detection.
 
 = 1.2.1 =
 * Updated the bundled Japanese translation to follow the WordPress Japanese translation style guide (half-width colons, parentheses and question marks).
@@ -72,6 +87,9 @@ Results are stored locally on your site as a transient. Nothing is ever sent to 
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Adds CSV export and a link list table view. Link detection now also covers relative URLs starting with "/", so results from Generate may change after updating.
 
 = 1.2.1 =
 Japanese translation refinements only. No functional changes.

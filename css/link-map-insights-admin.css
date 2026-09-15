@@ -2,6 +2,25 @@
     margin: 20px 0;
 }
 
+.lmi-tab-panel {
+    margin-top: 16px;
+}
+
+.lmi-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lmi-action-buttons #generate-link-map {
+    margin: 0;
+}
+
+#lmi-link-list-table th,
+#lmi-link-list-table td {
+    padding: 8px 12px;
+}
+
 #post-type-filters label,
 #term-filters label {
     display: inline-block;

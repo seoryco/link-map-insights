@@ -10,6 +10,50 @@ jQuery(document).ready(function ($) {
     let edges = new vis.DataSet();
     let network = null;
     let originalEdges = [];
+    let lastPostTypeLabels = {};
+
+    function renderLinkList(rawEdges) {
+        var $tbody = $('#lmi-link-list-table tbody').empty();
+        var list = Array.isArray(rawEdges) ? rawEdges : [];
+        if (list.length === 0) {
+            return;
+        }
+        var nodeIndex = {};
+        nodes.get().forEach(function (n) { nodeIndex[n.id] = n; });
+
+        function buildPostCell(id) {
+            var node = nodeIndex[id];
+            var title = node ? (node.full_label || node.label || String(id)) : ('#' + id);
+            var editUrl = (lmiData.edit_post_base || '') + '?post=' + encodeURIComponent(id) + '&action=edit';
+            return $('<td></td>').append(
+                $('<a>', { href: editUrl, target: '_blank', rel: 'noopener noreferrer' }).text(title)
+            );
+        }
+        function buildTypeCell(id) {
+            var node = nodeIndex[id];
+            var pt = node ? node.post_type : '';
+            var label = pt ? (lastPostTypeLabels[pt] || pt) : '';
+            return $('<td></td>').text(label);
+        }
+
+        list.forEach(function (edge) {
+            var $tr = $('<tr></tr>');
+            $tr.append(buildPostCell(edge.from));
+            $tr.append(buildTypeCell(edge.from));
+            $tr.append(buildPostCell(edge.to));
+            $tr.append(buildTypeCell(edge.to));
+            $tbody.append($tr);
+        });
+    }
+
+    $(document).on('click.lmiTabs', '.nav-tab[data-lmi-tab]', function (e) {
+        e.preventDefault();
+        var tab = $(this).data('lmi-tab');
+        $('.nav-tab[data-lmi-tab]').removeClass('nav-tab-active');
+        $(this).addClass('nav-tab-active');
+        $('.lmi-tab-panel').hide();
+        $('#lmi-tab-' + tab).show();
+    });
 
     function filterNodes() {
         if (nodes.length === 0) { return; }
@@ -329,6 +373,8 @@ jQuery(document).ready(function ($) {
         });
 
         var postTypeLabels = (response.post_type_labels && typeof response.post_type_labels === 'object') ? response.post_type_labels : {};
+        lastPostTypeLabels = postTypeLabels;
+        renderLinkList(response.raw_edges || []);
         function renderZeroLinksTable(containerId, list, totalTitleId, totalTitleFormat) {
             var itemsList = list && Array.isArray(list) ? list : [];
             var total = itemsList.length;

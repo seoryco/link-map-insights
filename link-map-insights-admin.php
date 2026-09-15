@@ -4,9 +4,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 // 管理画面のページ内容
 function seoryco_lmi_admin_page() {
+    $lmi_notice = isset( $_GET['lmi_notice'] ) ? sanitize_key( wp_unslash( $_GET['lmi_notice'] ) ) : '';
     ?>
     <div class="wrap">
         <h1>Link Map Insights</h1>
+        <?php if ( 'no_data' === $lmi_notice ) : ?>
+            <div class="notice notice-warning is-dismissible">
+                <p><?php esc_html_e( 'Please click "Generate" first to create the link map before downloading the CSV.', 'link-map-insights' ); ?></p>
+            </div>
+        <?php endif; ?>
+        <h2 class="nav-tab-wrapper">
+            <a href="#" class="nav-tab nav-tab-active" data-lmi-tab="map"><?php esc_html_e( 'Map view', 'link-map-insights' ); ?></a>
+            <a href="#" class="nav-tab" data-lmi-tab="list"><?php esc_html_e( 'Link list', 'link-map-insights' ); ?></a>
+        </h2>
+        <div id="lmi-tab-map" class="lmi-tab-panel">
         <div id="post-type-filters-wrap" class="lmi-term-group">
             <div class="lmi-term-group-title">
                 <span><?php esc_html_e( 'Post types to display', 'link-map-insights' ); ?></span>
@@ -48,7 +59,14 @@ function seoryco_lmi_admin_page() {
                 <div id="text">0%</div>
             </div>
         </div>
-        <button id="generate-link-map"><?php esc_html_e( 'Generate', 'link-map-insights' ); ?></button>
+        <p class="lmi-action-buttons">
+            <button id="generate-link-map"><?php esc_html_e( 'Generate', 'link-map-insights' ); ?></button>
+            <a
+                href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=seoryco_lmi_export_csv' ), 'seoryco_lmi_export_csv' ) ); ?>"
+                class="button"
+                id="lmi-export-csv"
+            ><?php esc_html_e( 'Download CSV', 'link-map-insights' ); ?></a>
+        </p>
         <h2 id="no-inbound-links-title"><?php
             /* translators: %d: number of pages. */
             printf( esc_html__( 'Pages with no inbound links: %d', 'link-map-insights' ), 0 );
@@ -59,9 +77,76 @@ function seoryco_lmi_admin_page() {
             printf( esc_html__( 'Pages with no outbound links: %d', 'link-map-insights' ), 0 );
         ?></h2>
         <div id="no-outbound-links-container"></div>
+        </div>
+        <div id="lmi-tab-list" class="lmi-tab-panel" style="display:none;">
+            <table id="lmi-link-list-table" class="wp-list-table widefat fixed striped">
+                <thead>
+                    <tr>
+                        <th><?php esc_html_e( 'Source post', 'link-map-insights' ); ?></th>
+                        <th><?php esc_html_e( 'Source post type', 'link-map-insights' ); ?></th>
+                        <th><?php esc_html_e( 'Target post', 'link-map-insights' ); ?></th>
+                        <th><?php esc_html_e( 'Target post type', 'link-map-insights' ); ?></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
     <?php
 }
+
+// CSV エクスポート処理（uploads 等には保存せず、php://output へ直接出力）
+function seoryco_lmi_handle_csv_export() {
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( esc_html__( 'You do not have permission to access this page.', 'link-map-insights' ) );
+    }
+    check_admin_referer( 'seoryco_lmi_export_csv' );
+
+    $dataset = get_transient( 'seoryco_lmi_dataset' );
+    if ( ! is_array( $dataset ) || empty( $dataset['raw_edges'] ) || ! is_array( $dataset['raw_edges'] ) ) {
+        $redirect_url = add_query_arg( 'lmi_notice', 'no_data', admin_url( 'admin.php?page=link-map-insights' ) );
+        wp_safe_redirect( $redirect_url );
+        exit;
+    }
+
+    nocache_headers();
+    header( 'Content-Type: text/csv; charset=utf-8' );
+    header( 'Content-Disposition: attachment; filename="link-map-insights-' . gmdate( 'Ymd-His' ) . '.csv"' );
+
+    $lmi_output = fopen( 'php://output', 'w' );
+    // UTF-8 BOM（Excel 等での文字化け対策）
+    fwrite( $lmi_output, "\xEF\xBB\xBF" );
+
+    fputcsv( $lmi_output, array(
+        __( 'from_id', 'link-map-insights' ),
+        __( 'from_title', 'link-map-insights' ),
+        __( 'from_url', 'link-map-insights' ),
+        __( 'from_post_type', 'link-map-insights' ),
+        __( 'to_id', 'link-map-insights' ),
+        __( 'to_title', 'link-map-insights' ),
+        __( 'to_url', 'link-map-insights' ),
+        __( 'to_post_type', 'link-map-insights' ),
+    ) );
+
+    foreach ( $dataset['raw_edges'] as $lmi_edge ) {
+        $from_id = isset( $lmi_edge['from'] ) ? (int) $lmi_edge['from'] : 0;
+        $to_id   = isset( $lmi_edge['to'] ) ? (int) $lmi_edge['to'] : 0;
+        fputcsv( $lmi_output, array(
+            $from_id,
+            html_entity_decode( get_the_title( $from_id ), ENT_QUOTES, 'UTF-8' ),
+            (string) get_permalink( $from_id ),
+            (string) get_post_type( $from_id ),
+            $to_id,
+            html_entity_decode( get_the_title( $to_id ), ENT_QUOTES, 'UTF-8' ),
+            (string) get_permalink( $to_id ),
+            (string) get_post_type( $to_id ),
+        ) );
+    }
+
+    fclose( $lmi_output );
+    exit;
+}
+add_action( 'admin_post_seoryco_lmi_export_csv', 'seoryco_lmi_handle_csv_export' );
 
 // 必要なスクリプトとスタイルの読み込み
 function seoryco_lmi_admin_enqueue_scripts($hook) {
@@ -81,6 +166,7 @@ function seoryco_lmi_admin_enqueue_scripts($hook) {
         wp_json_encode( array(
             'ajax_url'       => admin_url( 'admin-ajax.php' ),
             'nonce'          => wp_create_nonce( 'seoryco_lmi_get_dataset' ),
+            'edit_post_base' => admin_url( 'post.php' ),
         ) )
     );
     $lmi_inline .= sprintf( 'lmiData.cached_dataset = %s;', $lmi_cached_json );

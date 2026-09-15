@@ -3,6 +3,78 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * post_content 中のリンク先 URL を、相対パス・プロトコル相対も含めて解決する。
+ *
+ * @param string $content 対象の post_content。
+ * @return string[] 解決済みの絶対URLの配列（重複なし）。
+ */
+function seoryco_lmi_extract_urls_from_content( $content ) {
+	$urls = array();
+
+	// 既存: 本文中の絶対URL（https?://）を全文走査（互換のため維持）。
+	if ( preg_match_all( '/(https?:\/\/[^\s"\'<>]+)/i', $content, $matches ) && ! empty( $matches[1] ) ) {
+		$urls = $matches[1];
+	}
+
+	// home_url() の scheme + host(+port) を取得（サブディレクトリ設置でパスを重複させないため）。
+	$home_parts = wp_parse_url( home_url() );
+	$home_host  = isset( $home_parts['host'] ) ? $home_parts['host'] : '';
+	$home_port  = isset( $home_parts['port'] ) ? ':' . $home_parts['port'] : '';
+	$home_origin = isset( $home_parts['scheme'] ) ? $home_parts['scheme'] . '://' . $home_host . $home_port : '';
+
+	// href="…" / href='…' 属性値を抽出。
+	if ( preg_match_all( '/href\s*=\s*(["\'])(.*?)\1/i', $content, $href_matches ) && ! empty( $href_matches[2] ) ) {
+		foreach ( $href_matches[2] as $href ) {
+			$href = trim( $href );
+			if ( $href === '' ) {
+				continue;
+			}
+			$lower = strtolower( $href );
+			if ( $lower[0] === '#' ) {
+				continue;
+			}
+			if ( strpos( $lower, 'mailto:' ) === 0 || strpos( $lower, 'tel:' ) === 0 || strpos( $lower, 'javascript:' ) === 0 || strpos( $lower, 'data:' ) === 0 ) {
+				continue;
+			}
+			if ( strpos( $href, 'http://' ) === 0 || strpos( $href, 'https://' ) === 0 ) {
+				$urls[] = $href;
+				continue;
+			}
+			if ( strpos( $href, '//' ) === 0 ) {
+				// プロトコル相対: ホストが自サイトと一致する場合のみスキームを補う。
+				$proto_relative_parts = wp_parse_url( 'http:' . $href );
+				if ( ! empty( $proto_relative_parts['host'] ) && $home_host !== '' && strcasecmp( $proto_relative_parts['host'], $home_host ) === 0 ) {
+					$urls[] = ( isset( $home_parts['scheme'] ) ? $home_parts['scheme'] : 'https' ) . ':' . $href;
+				}
+				continue;
+			}
+			if ( $href[0] === '/' && $home_origin !== '' ) {
+				// "/" 始まりの相対パスのみ対象（サブディレクトリでの "/blog/blog/…" 重複を避けるため home_url() はそのまま使わない）。
+				$urls[] = $home_origin . $href;
+				continue;
+			}
+			// 先頭スラッシュなしの相対パス（"sub-page/" 等）は対象外。
+		}
+	}
+
+	return array_values( array_unique( $urls ) );
+}
+
+/**
+ * url_to_postid() の結果を同一リクエスト内でメモ化する。
+ *
+ * @param string $url 解決したいURL。
+ * @return int 投稿ID（見つからない場合は0）。
+ */
+function seoryco_lmi_url_to_postid_cached( $url ) {
+	static $cache = array();
+	if ( ! isset( $cache[ $url ] ) ) {
+		$cache[ $url ] = url_to_postid( $url );
+	}
+	return $cache[ $url ];
+}
+
 function seoryco_lmi_get_dataset() {
 	header( 'Cache-Control: no-store, no-cache, must-revalidate, max-age=0' );
 	header( 'Pragma: no-cache' );
@@ -27,6 +99,7 @@ function seoryco_lmi_get_dataset() {
 		wp_send_json( array(
 			'nodes'             => array(),
 			'edges'             => array(),
+			'raw_edges'          => array(),
 			'terms_colors'       => array(),
 			'post_type_labels'   => array(),
 			'no_inbound_links'   => array(),
@@ -51,6 +124,7 @@ function seoryco_lmi_get_dataset() {
 		wp_send_json( array(
 			'nodes'             => array(),
 			'edges'             => array(),
+			'raw_edges'         => array(),
 			'terms_colors'      => array(),
 			'post_type_labels'  => array(),
 			'no_inbound_links'  => array(),
@@ -67,6 +141,7 @@ function seoryco_lmi_get_dataset() {
 	$articles = get_posts( $args );
 	$nodes    = array();
 	$edges    = array();
+	$raw_edges = array();
 	$terms_colors = array();
 	$no_inbound_links  = array();
 	$no_outbound_links = array();
@@ -177,11 +252,8 @@ function seoryco_lmi_get_dataset() {
 
         $content = $post->post_content;
 
-        // 既存のURLを取得（PHP 8+: マッチなし時は $matches[1] が未定義のため配列で受ける）
-        $urls = array();
-        if ( preg_match_all( '/(https?:\/\/[^\s"\'<>]+)/i', $content, $matches ) && ! empty( $matches[1] ) ) {
-            $urls = array_unique( $matches[1] );
-        }
+        // 絶対URL・href属性・プロトコル相対URLをまとめて抽出（相対パスも解決）。
+        $urls = seoryco_lmi_extract_urls_from_content( $content );
 
         // コメント内のlinkとidまたはpostIdからIDを取得（大文字・小文字を区別しない）
         $post_ids = array();
@@ -201,13 +273,21 @@ function seoryco_lmi_get_dataset() {
         $urls = array_unique($urls);
 
         $has_outbound_link = false;
+        $raw_edge_seen_to = array(); // raw_edges 内の同一対（from/to）の重複除去用（edges の集計ロジックは変更しない）
         foreach ($urls as $url) {
-            $linked_post_id = url_to_postid($url);
+            $linked_post_id = seoryco_lmi_url_to_postid_cached( $url );
             if ($linked_post_id && ($linked_post_id !== $post->ID)) { // 自己リンクを回避
                 $edges[] = [
                     'from' => $post->ID,
                     'to' => $linked_post_id,
                 ];
+                if ( ! isset( $raw_edge_seen_to[ $linked_post_id ] ) ) {
+                    $raw_edge_seen_to[ $linked_post_id ] = true;
+                    $raw_edges[] = [
+                        'from' => $post->ID,
+                        'to' => $linked_post_id,
+                    ];
+                }
                 $has_outbound_link = true;
             }
         }
@@ -277,6 +357,7 @@ function seoryco_lmi_get_dataset() {
 	$result = array(
 		'nodes'              => $nodes,
 		'edges'              => $consolidated_edges,
+		'raw_edges'          => $raw_edges,
 		'terms_colors'       => $terms_colors,
 		'post_type_labels'   => $post_type_labels,
 		'no_inbound_links'   => $no_inbound_links,

@@ -7,7 +7,7 @@ Plugin Name: Link Map Insights
 Plugin URI: https://seory.co.jp/link-map-insights/
 Description: Visualize your site's internal link structure in one click.
 Author: seoryco
-Version: 1.2.1
+Version: 1.3.0
 Author URI: https://seory.co.jp
 License: GPL2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,7 +19,7 @@ Requires PHP: 7.4
 */
 
 // プラグインのバージョンを定義
-define( 'SEORYCO_LMI_VERSION', '1.2.1' );
+define( 'SEORYCO_LMI_VERSION', '1.3.0' );
 
 function seoryco_lmi_add_admin_and_help_menu() {
     // メインメニュー「Link Map」を追加

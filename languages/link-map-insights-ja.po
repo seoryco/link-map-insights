@@ -3,7 +3,7 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Link Map Insights 1.2.1\n"
+"Project-Id-Version: Link Map Insights 1.3.0\n"
 "Report-Msgid-Bugs-To: https://seory.co.jp/link-map-insights/\n"
 "Last-Translator: seoryco\n"
 "Language-Team: Japanese\n"
@@ -209,3 +209,71 @@ msgstr "編集"
 #: js/link-map-insights-admin.js
 msgid "View"
 msgstr "表示"
+
+#: link-map-insights-admin.php
+msgid "Please click \"Generate\" first to create the link map before downloading the CSV."
+msgstr "CSV をダウンロードする前に、まず Generate ボタンをクリックしてリンクマップを作成してください。"
+
+#: link-map-insights-admin.php
+msgid "Map view"
+msgstr "マップ表示"
+
+#: link-map-insights-admin.php
+msgid "Link list"
+msgstr "リンク一覧"
+
+#: link-map-insights-admin.php
+msgid "Download CSV"
+msgstr "CSV をダウンロード"
+
+#: link-map-insights-admin.php
+msgid "Source post"
+msgstr "リンク元"
+
+#: link-map-insights-admin.php
+msgid "Source post type"
+msgstr "リンク元の投稿タイプ"
+
+#: link-map-insights-admin.php
+msgid "Target post"
+msgstr "リンク先"
+
+#: link-map-insights-admin.php
+msgid "Target post type"
+msgstr "リンク先の投稿タイプ"
+
+#: link-map-insights-admin.php
+msgid "You do not have permission to access this page."
+msgstr "このページにアクセスする権限がありません。"
+
+#: link-map-insights-admin.php
+msgid "from_id"
+msgstr "リンク元 ID"
+
+#: link-map-insights-admin.php
+msgid "from_title"
+msgstr "リンク元タイトル"
+
+#: link-map-insights-admin.php
+msgid "from_url"
+msgstr "リンク元 URL"
+
+#: link-map-insights-admin.php
+msgid "from_post_type"
+msgstr "リンク元投稿タイプ"
+
+#: link-map-insights-admin.php
+msgid "to_id"
+msgstr "リンク先 ID"
+
+#: link-map-insights-admin.php
+msgid "to_title"
+msgstr "リンク先タイトル"
+
+#: link-map-insights-admin.php
+msgid "to_url"
+msgstr "リンク先 URL"
+
+#: link-map-insights-admin.php
+msgid "to_post_type"
+msgstr "リンク先投稿タイプ"

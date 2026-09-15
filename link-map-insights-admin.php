@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 // 管理画面のページ内容
 function seoryco_lmi_admin_page() {
+    // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Display-only flag set by our own redirect; no action is taken.
     $lmi_notice = isset( $_GET['lmi_notice'] ) ? sanitize_key( wp_unslash( $_GET['lmi_notice'] ) ) : '';
     ?>
     <div class="wrap">
@@ -113,9 +114,9 @@ function seoryco_lmi_handle_csv_export() {
     header( 'Content-Type: text/csv; charset=utf-8' );
     header( 'Content-Disposition: attachment; filename="link-map-insights-' . gmdate( 'Ymd-His' ) . '.csv"' );
 
-    $lmi_output = fopen( 'php://output', 'w' );
     // UTF-8 BOM（Excel 等での文字化け対策）
-    fwrite( $lmi_output, "\xEF\xBB\xBF" );
+    echo "\xEF\xBB\xBF";
+    $lmi_output = fopen( 'php://output', 'w' );
 
     fputcsv( $lmi_output, array(
         __( 'from_id', 'link-map-insights' ),
@@ -143,7 +144,6 @@ function seoryco_lmi_handle_csv_export() {
         ) );
     }
 
-    fclose( $lmi_output );
     exit;
 }
 add_action( 'admin_post_seoryco_lmi_export_csv', 'seoryco_lmi_handle_csv_export' );
